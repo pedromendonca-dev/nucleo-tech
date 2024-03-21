@@ -1,0 +1,33 @@
+.input{
+    padding: 20px 34px;
+    margin-bottom: 16px;
+ 
+    color: var(--color-white);
+    background-color: transparent;
+}
+
+.input, .input-password-container{
+    width: 466px;
+    height: 60px;
+
+    border-radius: 8px;
+    border: 1px solid var(--color-border-gray);
+}
+
+.input:focus {
+    outline: none;
+    border: 2px solid var(--color-blue-100) !important;
+}
+
+.input-password-container{
+    display: flex;
+
+    width: 466px !important; 
+    height: 60px;
+
+    padding-right: 34px;
+}
+
+.password{
+    border: 0px;
+}

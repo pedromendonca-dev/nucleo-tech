@@ -1,0 +1,105 @@
+.register-illustration{
+    position: fixed;
+    bottom: 0;
+    right: 0;
+}
+
+.register-container {
+    display: flex;
+    align-items: center;
+  
+    width: 100%;
+    height: 100vh;
+
+}
+
+.rigth-side {
+    width: 50%;
+    height: 100%;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.rigth-side > p {
+    width: 357px;
+    margin: 0 auto;
+    
+    font-size: 24px;
+    font-weight: 300;
+    
+    text-align: center;
+    color: var(--color-white);
+}
+
+.rigth-side > p strong {
+    font-weight: 600;
+    color: var(--color-blue-100);
+}
+
+.register-card{
+    width: 50%;
+    height: 100%;
+    
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    
+    
+    color: var(--color-white);
+    background-color: var(--color-gray);
+}
+
+form{
+    margin: 0 94.5px;
+}
+
+.title h1{
+    font-size: 20px;
+    font-weight: 600;
+
+    margin-bottom: 4px;
+}
+
+.title p{
+    font-size: 14px;
+    font-weight: 300;
+
+    margin-bottom: 32px;
+}
+
+.register-link-container{
+    font-size: 12px; 
+    text-align: center;
+}
+
+.password-container{
+    width: 466px;
+
+    display: flex;
+    justify-content: space-between;
+
+    .textfield{
+        width: 228px;
+    }
+
+
+    .input{
+        width: 100%;
+    }
+
+    .input-password-container{
+        max-width: 228px;
+        margin-bottom: 16px;
+    }
+}
+  
+.register-card img{
+    width: 24px;
+    height: 24px;
+
+    margin-top: 15px;
+    
+}
+

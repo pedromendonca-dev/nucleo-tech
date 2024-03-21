@@ -1,0 +1,11 @@
+export { default as Introdution } from "./Introdution";
+export { default as Contact } from "./Contact";
+export { default as Login } from "./Login";
+export { default as Register } from "./Register";
+export { default as Faq } from "./Faq";
+export { default as Cursojava } from "./CursoJava";
+export { default as Cursoreact } from "./CursoReact";
+export { default as Cursohtml } from "./Cursohtml";
+export { default as Cursojavascript } from "./Cursojavascript";
+export { default as Cursotypescript } from "./Cursotypescript";
+export { default as Cursopython } from "./Cursopython";
