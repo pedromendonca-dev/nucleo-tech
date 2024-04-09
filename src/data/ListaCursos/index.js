@@ -9,7 +9,7 @@ const ListaCursos = () => {
   return (
     <div className="course-list">
       {courses.map((course, index) => (
-        <Link key={index} href={course.url}>
+        <Link key={index} href={`/curso/${course.id}`}>
           <Card
             key={index}
             Icon={course.icon} 
