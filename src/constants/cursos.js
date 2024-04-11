@@ -42,6 +42,11 @@ export const courses = [
             titulo: 'Curso React: Criando componentes no React - #04',
             url: '-wrsG0IGc-M',
             describe:'Nessa aula aprenderemos sobre componetização e suas utilizações'
+          },
+          {
+            titulo: 'Video do Allan',
+            url: 'm2HoMvcA2RM',
+            describe:'Video do allan descrevendo sobre as paginas'
           }
         ]
       }
