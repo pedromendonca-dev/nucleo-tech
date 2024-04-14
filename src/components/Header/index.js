@@ -5,8 +5,9 @@ import { useNavigate } from "react-router-dom";
 import { HeaderOptions } from "../../constants/header";
 
 import Logo from "../../assets/images/logo.svg";
-import Person from "../../assets/icons/Person.svg";
-import Plus from "../../assets/icons/Plus.svg";
+import Exit from "../../assets/icons/Exit.png";
+// import Person from "../../assets/icons/Person.svg";
+// import Plus from "../../assets/icons/Plus.svg";
 
 import Button from "../Button";
 
@@ -34,8 +35,14 @@ const Header = () => {
         </ul>
 
         <div className="header-buttons">
-          <Button name="Login" icon={Person} onClick={() => navigate('/login')} />
-          <Button name="Criar conta" icon={Plus} variant="button-border" onClick={() => navigate('/cadastrar')} />
+          {/* <Button name="Login" icon={Person} onClick={() => navigate('/')} />
+          <Button name="Criar conta" icon={Plus} variant="button-border" onClick={() => navigate('/cadastrar')} /> */}
+          <Button name="Sair" icon={Exit} 
+          
+          onClick={() => {
+            navigate('/');
+            alert('Logout realizado com sucesso!'); 
+            }} />
         </div>
       </div>
     </div>
