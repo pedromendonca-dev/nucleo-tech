@@ -2,7 +2,7 @@ import "./style.scss"
 
 import Eye from "../../assets/icons/Eye.svg";
 
-const Input = ({id, placeholder, type }) => {
+const Input = ({id, placeholder, type, onChange, value }) => {
   return (
     <div className={type === "password" ? "input-password-container" : ""}>
       <input
@@ -10,6 +10,8 @@ const Input = ({id, placeholder, type }) => {
         placeholder={placeholder}
         id={id}
         type={type}
+        value={value}
+        onChange={onChange}
       />
       {type === "password" && <img src={Eye} alt="eye" />}
     </div>

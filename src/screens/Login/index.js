@@ -3,27 +3,37 @@ import "./style.scss";
 import LoginIllustration from "../../assets/images/login.svg";
 import { Button, Link, TextField } from "../../components";
 import users from '../../constants/users';
-
+import { useNavigate } from 'react-router-dom';
 
 const Login = () => {
-
     const [email, setEmail] = useState('');
     const [senha, setSenha] = useState('');
+    const [loading, setLoading] = useState(false);
+    const navigate = useNavigate();
+    const [loaded, setLoaded] = useState(false);
 
-    const handleLogin = (e) => {
-        e.preventDefault();
-        const user = users.find((user) => user.email === email);
+    const handleLogin = async (event) => {
+        event.preventDefault();
+        setLoading(true);
+
+        // Simulação de autenticação
+        const user = users.find(user => user.email === email);
         if (!user) {
             alert('Usuário não encontrado.');
+            setLoading(false);
             return;
         }
         if (user.senha !== senha) {
             alert('Senha incorreta.');
+            setLoading(false);
             return;
         }
+        
         alert('Login realizado com sucesso!');
-        // Redirecione o usuário ou atualize o estado da aplicação conforme necessário
-    };
+        navigate('/home');
+        setLoading(false);
+        setLoaded(true);
+    }
 
     return (
         <div className='login-container'>
@@ -32,7 +42,6 @@ const Login = () => {
                 <p>Acesse sua conta para <strong>desbloquear</strong> todo o <strong>potencial</strong> da nossa plataforma</p>
             </div>
             <div className='login-card'>
-                
                 <form onSubmit={handleLogin}>
                     <div className="title">
                         <h1>Login</h1>
@@ -44,7 +53,7 @@ const Login = () => {
                         placeholder='Insira seu e-mail'
                         type='text' 
                         value={email}
-                        onChange={(e) => setEmail(e.target.value)}
+                        onChange={e => setEmail(e.target.value)}
                     />
                     <TextField 
                         id='senha' 
@@ -52,7 +61,7 @@ const Login = () => {
                         placeholder='Insira sua senha'
                         type='password' 
                         value={senha}
-                        onChange={(e) => setSenha(e.target.value)}
+                        onChange={e => setSenha(e.target.value)}
                     />
                     <div className="reset-password">
                         <Link children='Esqueci minha senha' href='#' />
@@ -62,7 +71,6 @@ const Login = () => {
                         Não possui cadastro? <Link children='Registre-se aqui' href='/cadastrar' />
                     </div>
                 </form>
-                
             </div>
         </div>
     )

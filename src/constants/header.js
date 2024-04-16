@@ -1,5 +1,5 @@
 export const HeaderOptions = [
-  { name: "Cursos gratuitos", link: "/" },
+  { name: "Cursos gratuitos", link: "/home" },
   { name: "Dúvidas frequentes", link: "/faq" },
   { name: "Contato", link: "/contact" },
 ];
