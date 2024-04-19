@@ -3,7 +3,7 @@ import "./style.scss";
 import courses from '../../constants/cursos';
 import { Card, Link } from '../../components';
 
-
+//PEDRO! acho q deveriamos por essa pasta em components e deixar o db em data. mais organizado e faz mais sentido...
 
 const ListaCursos = () => {
   return (
