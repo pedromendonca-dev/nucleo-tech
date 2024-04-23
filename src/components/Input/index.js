@@ -13,6 +13,8 @@ const Input = ({id, placeholder, type, onChange, value }) => {
         value={value}
         onChange={onChange}
       />
+
+      {/* duvida aq: como ajeitar bug visual de password? fiz gambiarra */}
       {type === "password" && <img src={Eye} alt="eye" />}
     </div>
   );

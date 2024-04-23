@@ -6,17 +6,23 @@ import users from '../../constants/users';
 import { useNavigate } from 'react-router-dom';
 
 const Login = () => {
+
+    // duvida aq : oq realmente az o use State? nivel: breve, tenhp alguma ideia
     const [email, setEmail] = useState('');
     const [senha, setSenha] = useState('');
     const [loading, setLoading] = useState(false);
     const navigate = useNavigate();
     const [loaded, setLoaded] = useState(false);
 
+
+    // duvida aq : oq é async?
     const handleLogin = async (event) => {
         event.preventDefault();
         setLoading(true);
 
         // Simulação de autenticação
+
+        // duvida aq :"(user => user.email === email);" entendi oq faz, mas não entendi a estrutura. gostaria de ver de outra forma
         const user = users.find(user => user.email === email);
         if (!user) {
             alert('Usuário não encontrado.');

@@ -4,3 +4,5 @@ export { default as Input } from "./Input";
 export { default as TextField } from "./TextField";
 export { default as Link } from "./Link";
 export { default as Card } from "./Card";
+
+//PEDRO! ei, não precisava exportar aq o VideoPlayer?

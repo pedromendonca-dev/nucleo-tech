@@ -1,6 +1,8 @@
 import React from 'react';
 import YouTube from 'react-youtube';
 
+//PEDRO! não era melhor por esses styles em um scss?
+
 const VideoPlayer = ({ videoId }) => {
   const opts = {
     height: '390',
