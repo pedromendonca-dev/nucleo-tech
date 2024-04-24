@@ -1,22 +1,32 @@
-import React from 'react'; 
+import React, { useEffect, useState } from 'react'; 
 import "./style.scss";
 import courses from '../../constants/cursos';
 import { Card, Link } from '../../components';
+import axios from "axios";
 
-//PEDRO! acho q deveriamos por essa pasta em components e deixar o db em data. mais organizado e faz mais sentido...
+
 
 const ListaCursos = () => {
+  const [cursos, setCursos] = useState([])
+
+  useEffect(()=>{
+    axios.get("http://localhost:3000/cursos").then((res)=>{
+      setCursos(res.data);
+    })
+  },[])
+
+
   return (
     <div className="course-list">
-      {courses.map((course, index) => (
-        <Link key={index} href={`/curso/${course.id}`}>
+      {courses.map((cursos) => (
+        <Link key={cursos.id} href={"curso/"+cursos.id}>
           <Card
-            key={index}
-            Icon={course.icon} 
-            tutorName={course.author} 
-            courseName={course.nome}
-            describe={course.describe}
-            rate={course.rate}
+            key={cursos.index}
+            Icon={cursos.icon} 
+            tutorName={cursos.author} 
+            courseName={cursos.nome}
+            describe={cursos.describe}
+            rate={cursos.rate}
           />
         </Link>
       ))}

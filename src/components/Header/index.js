@@ -39,6 +39,7 @@ const Header = () => {
         <div className="header-buttons">
           {/* <Button name="Login" icon={Person} onClick={() => navigate('/')} />
           <Button name="Criar conta" icon={Plus} variant="button-border" onClick={() => navigate('/cadastrar')} /> */}
+          {/* Adicionar condição de entrada e saida do usuario */}
           <Button name="Sair" icon={Exit} 
           
           onClick={() => {

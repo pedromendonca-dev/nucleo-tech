@@ -1,18 +1,26 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Layout from "../../layout";
 import { useParams } from 'react-router-dom';
-import courses from "../../constants/cursos";
 import './style.scss';
 import YouTube from 'react-youtube';
+import axios from "axios"
 
 const Cursos = () => {
-  const { id } = useParams();
-  const courseId = parseInt(id);
-  const curso = courses.find(curso => curso.id === courseId);
 
+  const [curso, setCurso] = useState()
+  const { id } = useParams();
   const [expandedItem, setExpandedItem] = useState(-1);
   const [videoUrl, setVideoUrl] = useState('');
   const [videoDescricao, setVideoDescricao] = useState('')
+
+
+useEffect(()=>{
+  console.log(`http://localhost:3000/cursos/${id}`);
+  axios.get(`http://localhost:3000/cursos/${id}`).then((res)=>{
+    setCurso(res.data);
+  })
+})
+
 
   const handleItemClick = (index) => {
     setExpandedItem(expandedItem === index ? -1 : index);
@@ -27,8 +35,8 @@ const Cursos = () => {
     <Layout>
       <div className="curso-container">
         <div className='conteudos-container'>
-          {curso.conteudos.map((conteudo, index) => (
-            <div key={index}>
+          {curso?.conteudos?.map((conteudo, index) => (
+            <div key={curso.index}>
               <h3 onClick={() => handleItemClick(index, conteudo.videoUrl)}>{conteudo.titulo}</h3>
               {expandedItem === index && (
                 <ul>
