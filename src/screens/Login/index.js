@@ -2,45 +2,34 @@ import React, { useState } from 'react';
 import "./style.scss";
 import LoginIllustration from "../../assets/images/login.svg";
 import { Button, Link, TextField } from "../../components";
-import users from '../../constants/users';
+import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
 const Login = () => {
-
-    // duvida aq : oq realmente az o use State? nivel: breve, tenhp alguma ideia
     const [email, setEmail] = useState('');
     const [senha, setSenha] = useState('');
-    const [loading, setLoading] = useState(false);
     const navigate = useNavigate();
-    const [loaded, setLoaded] = useState(false);
 
-
-    // duvida aq : oq é async?
-    const handleLogin = async (event) => {
-        event.preventDefault();
-        setLoading(true);
-
-        // Simulação de autenticação
-
-        // duvida aq :"(user => user.email === email);" entendi oq faz, mas não entendi a estrutura. gostaria de ver de outra forma
-        const user = users.find(user => user.email === email);
-        if (!user) {
-            alert('Usuário não encontrado.');
-            setLoading(false);
-            return;
+    const handleLogin = async (e) => {
+        e.preventDefault();
+      
+        try {
+          const response = await axios.post('http://localhost:3000/usuarios/login', {
+            email,
+            senha
+          });
+      
+          if (response.status === 200) {
+            alert('Login realizado com sucesso!');
+            navigate('/Introdution'); 
+          } else {
+            alert('Erro ao realizar o login. Verifique suas credenciais.');
+          }
+        } catch (error) {
+          console.error('Erro ao realizar o login:', error);
+          alert('Erro ao realizar o login. Verifique sua conexão ou tente novamente mais tarde.');
         }
-        if (user.senha !== senha) {
-            alert('Senha incorreta.');
-            setLoading(false);
-            return;
-        }
-        
-        alert('Login realizado com sucesso!');
-        navigate('/home');
-        setLoading(false);
-        setLoaded(true);
-    }
-
+      }
     return (
         <div className='login-container'>
             <img src={LoginIllustration} alt="login-illustration" className="login-illustration"/>
@@ -55,7 +44,7 @@ const Login = () => {
                     </div>
                     <TextField 
                         id='email' 
-                        name='E-mail' 
+                        name='email' 
                         placeholder='Insira seu e-mail'
                         type='text' 
                         value={email}
@@ -63,7 +52,7 @@ const Login = () => {
                     />
                     <TextField 
                         id='senha' 
-                        name='Senha' 
+                        name='senha' 
                         placeholder='Insira sua senha'
                         type='password' 
                         value={senha}

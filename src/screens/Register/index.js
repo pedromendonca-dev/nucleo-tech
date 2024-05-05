@@ -2,38 +2,60 @@ import React, { useState } from 'react';
 import "./style.scss";
 import { Button, TextField, Link } from "../../components";
 import RegisterIllustration from "../../assets/images/register.svg";
-import users from '../../constants/users'; 
+import axios from 'axios'
 
 const Register = () => {
+    const [nome, setNome] = useState()
+    const [email,setEmail] = useState()
+    const [senha,setSenha] = useState()
+    const [confirmarSenha, setConfirmarSenha] = useState()
+    const [telefone, setTelefone] = useState()
+    const [userType, setUserType] = useState()
+    
+    const [users,setUsers] = useState()
 
-    const [formData, setFormData] = useState({
-        nome: '',
-        email: '',
-        senha: '',
-        confirmarSenha: '',
-        telefone: '',
-    });
 
-    const handleChange = (e) => {
-        setFormData({ ...formData, [e.target.id]: e.target.value });
-    };
 
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        // Verifica se as senhas conferem
-        if (formData.senha !== formData.confirmarSenha) {
-            alert('As senhas não conferem.');
+    const handleSubmit = async (e) =>{
+        e.preventDefault()
+
+        if(senha!==confirmarSenha){
+            alert ("Senhas divergentes")
             return;
         }
-        // Verifica se o usuário já existe
-        const userExists = users.some(user => user.email === formData.email);
-        if (userExists) {
-            alert('Usuário já cadastrado com este e-mail.');
-            return;
+
+        try{
+        
+            const user = {
+                nome,
+                email,
+                senha,
+                telefone,
+                userType
+            }
+
+            const clearFields =()=>{
+                setNome('');
+                setEmail('');
+                setSenha('');
+                setConfirmarSenha('');
+                setTelefone('');
+                setUserType('');
+            }
+
+            const response = await axios.post('http://localhost:3000/usuarios', user)
+
+            
+            clearFields();
+            
+            alert("Cadastro bem sucedido")
+       
+        }catch(error){
+
+            console.error("Erro no cadastro do usuario", error)
+
+            alert("Houve alguma inconsistencia no sistema, tente novamente mais tarde.")
         }
-        // Aqui você poderia adicionar o novo usuário à lista (isso apenas atualizará a lista durante a sessão atual, pois estamos em um ambiente frontend)
-        alert('Cadastro realizado com sucesso!');
-        // Redefinir formulário ou redirecionar o usuário
     };
 
     return (
@@ -49,16 +71,16 @@ const Register = () => {
                         name="Nome"
                         type='text' 
                         placeholder="Insira seu nome"
-                        value={formData.nome}
-                        onChange={handleChange}
+                        value={nome}
+                        onChange={(e)=>setNome(e.target.value)}
                     />
                     <TextField 
                         id='email' 
                         name='E-mail' 
                         type='text' 
                         placeholder='Insira seu e-mail'
-                        value={formData.email}
-                        onChange={handleChange}
+                        value={email}
+                        onChange={(e)=>setEmail(e.target.value)}
                     />
 
                     <div className="password-container">
@@ -67,16 +89,16 @@ const Register = () => {
                             name='Senha' 
                             type='password' 
                             placeholder='********'
-                            value={formData.senha}
-                            onChange={handleChange}
+                            value={senha}
+                            onChange={(e)=>setSenha(e.target.value)}
                         />
                         <TextField 
                             id='confirmar-senha' 
                             name='Confirmar senha' 
                             type='password' 
                             placeholder='********'
-                            value={formData.confirmarSenha}
-                            onChange={handleChange}
+                            value={confirmarSenha}
+                            onChange={(e)=>setConfirmarSenha(e.target.value)}
                         />
                     </div>
                     <TextField
@@ -84,9 +106,16 @@ const Register = () => {
                         name="Telefone"
                         type='text' 
                         placeholder="Insira seu telefone"
-                        value={formData.telefone}
-                        onChange={handleChange}
+                        value={telefone}
+                        onChange={(e)=>setTelefone(e.target.value)}
                     />
+                    <select className='select' name='select' onChange={(e)=>setUserType(e.target.value)}>Tipo do Usuario
+                        <option value='1' selected><strong>Estudante</strong></option>
+                        <option value='2'><strong>Professor</strong></option>
+                    </select>
+
+
+
                     <Button type="submit" name="Registrar" variant="button-filled" />
                     <div className="register-link-container">
                         Já possui cadastro? <Link children='Faça seu login' href='/login' />

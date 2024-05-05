@@ -102,4 +102,15 @@ form{
     margin-top: 15px;
     
 }
+.select {
+    margin-top:15px;
+    display: flex;
+    align-items: left;
+
+    width: 466px;
+    height: 48px;
+    border-radius: 8px;
+    background-color: var(--color-gray);
+    color: var(--color-white);
+}
 
