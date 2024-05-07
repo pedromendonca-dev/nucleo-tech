@@ -6,15 +6,20 @@ import { HeaderOptions } from "../../constants/header";
 
 import Logo from "../../assets/images/logo.svg";
 import Exit from "../../assets/icons/Exit.png";
-// import Person from "../../assets/icons/Person.svg";
-// import Plus from "../../assets/icons/Plus.svg";
 
 import Button from "../Button";
+import { useUser } from "../../hooks/UserContext";
 
 const Header = () => {
   const navigate = useNavigate();
+  const { user, logoutUser } = useUser();
 
-  // duvida aq: "const location = window?.location?.pathname;" oq é isso?
+  const handleLogout = () => {
+    logoutUser();
+    alert('Logout realizado com sucesso!');
+    navigate('/');
+  };
+
   const location = window?.location?.pathname;
 
   return (
@@ -25,7 +30,7 @@ const Header = () => {
       </div>
       <div className="header-options">
         <ul>
-          {/* duvida aq: não entendi essa "função"(?) abaixo */}
+          {}
           {HeaderOptions.map((item) => (
             <li
               className={item.link === location && "underlined"}
@@ -37,9 +42,13 @@ const Header = () => {
         </ul>
 
         <div className="header-buttons">
-          {/* <Button name="Login" icon={Person} onClick={() => navigate('/')} />
-          <Button name="Criar conta" icon={Plus} variant="button-border" onClick={() => navigate('/cadastrar')} /> */}
-          {/* Adicionar condição de entrada e saida do usuario */}
+        <ul>
+            {user && user.userType === 2 && (
+            <li onClick={() => navigate('/meus-cursos')}>
+              Meus cursos
+            </li>
+            )}</ul>
+       
           <Button name="Sair" icon={Exit} 
           
           onClick={() => {

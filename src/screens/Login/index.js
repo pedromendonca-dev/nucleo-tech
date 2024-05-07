@@ -4,32 +4,42 @@ import LoginIllustration from "../../assets/images/login.svg";
 import { Button, Link, TextField } from "../../components";
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import { useUser } from '../../hooks/UserContext';
 
 const Login = () => {
-    const [email, setEmail] = useState('');
-    const [senha, setSenha] = useState('');
+    const [form, setForm] = useState({ email: '', password: '' });
     const navigate = useNavigate();
+    const [error, setError] = useState('');
+    const { loginUser } = useUser();
 
     const handleLogin = async (e) => {
         e.preventDefault();
-      
+
         try {
-          const response = await axios.post('http://localhost:3000/usuarios/login', {
-            email,
-            senha
-          });
-      
-          if (response.status === 200) {
-            alert('Login realizado com sucesso!');
-            navigate('/Introdution'); 
-          } else {
-            alert('Erro ao realizar o login. Verifique suas credenciais.');
-          }
+            const response = await axios.get('http://localhost:3000/usuarios');
+            const users = response.data;
+
+            const filteredUsers = users.filter((user) => user.email === form.email && user.senha === form.password);
+
+            if (filteredUsers.length > 0) {
+                console.log('Usuário logado');
+                const userData = {
+                    name: filteredUsers[0].nome,
+                    email: form.email,
+                    userType: filteredUsers[0].userType
+                };
+                console.log(userData)
+                loginUser(userData);
+                navigate('/home');
+            } else {
+                setError('E-mail ou senha inválidos');
+            }
         } catch (error) {
-          console.error('Erro ao realizar o login:', error);
-          alert('Erro ao realizar o login. Verifique sua conexão ou tente novamente mais tarde.');
+            setError('Problema ao conectar-se ao servidor. Tente novamente mais tarde.');
         }
-      }
+    };
+
+
     return (
         <div className='login-container'>
             <img src={LoginIllustration} alt="login-illustration" className="login-illustration"/>
@@ -47,16 +57,16 @@ const Login = () => {
                         name='email' 
                         placeholder='Insira seu e-mail'
                         type='text' 
-                        value={email}
-                        onChange={e => setEmail(e.target.value)}
+                        value={form.email}
+                        onChange={e => setForm({ ...form, email: e.target.value })}
                     />
                     <TextField 
                         id='senha' 
-                        name='senha' 
+                        name='password' 
                         placeholder='Insira sua senha'
                         type='password' 
-                        value={senha}
-                        onChange={e => setSenha(e.target.value)}
+                        value={form.password}
+                        onChange={e => setForm({ ...form, password: e.target.value })}
                     />
                     <div className="reset-password">
                         <Link children='Esqueci minha senha' href='#' />
@@ -66,9 +76,10 @@ const Login = () => {
                         Não possui cadastro? <Link children='Registre-se aqui' href='/cadastrar' />
                     </div>
                 </form>
+                {error && <p id='error'className="error-message">{error}</p>}
             </div>
         </div>
-    )
+    );
 }
 
 export default Login;

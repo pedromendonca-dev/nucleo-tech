@@ -104,3 +104,14 @@ form{
     justify-content: right;
     text-align: right;
 }
+.error-message{
+        width: 48%;
+        margin-left: 250px;
+        font-size: 12px;
+        margin-top: 10px;
+        display: flex;
+        flex-direction: column;
+        justify-content: right;
+        text-align: center;
+        background-color: #c81d25;
+}

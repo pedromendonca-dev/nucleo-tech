@@ -3,6 +3,7 @@ import "./style.scss";
 import { Button, TextField, Link } from "../../components";
 import RegisterIllustration from "../../assets/images/register.svg";
 import axios from 'axios'
+import { Navigate } from 'react-router-dom';
 
 const Register = () => {
     const [nome, setNome] = useState()
@@ -11,50 +12,40 @@ const Register = () => {
     const [confirmarSenha, setConfirmarSenha] = useState()
     const [telefone, setTelefone] = useState()
     const [userType, setUserType] = useState()
-    
-    const [users,setUsers] = useState()
 
 
+    const clearFields = () => {
+        setNome('');
+        setEmail('');
+        setSenha('');
+        setConfirmarSenha('');
+        setTelefone('');
+    };
 
-    const handleSubmit = async (e) =>{
-        e.preventDefault()
+    const handleSubmit = async (e) => {
+        e.preventDefault();
 
-        if(senha!==confirmarSenha){
-            alert ("Senhas divergentes")
+        if (senha !== confirmarSenha) {
+            alert("Senhas divergentes");
             return;
         }
 
-        try{
-        
+        try {
             const user = {
                 nome,
                 email,
                 senha,
                 telefone,
                 userType
-            }
+            };
 
-            const clearFields =()=>{
-                setNome('');
-                setEmail('');
-                setSenha('');
-                setConfirmarSenha('');
-                setTelefone('');
-                setUserType('');
-            }
-
-            const response = await axios.post('http://localhost:3000/usuarios', user)
-
-            
+            const response = await axios.post('http://localhost:3000/usuarios', user);
             clearFields();
-            
-            alert("Cadastro bem sucedido")
-       
-        }catch(error){
-
-            console.error("Erro no cadastro do usuario", error)
-
-            alert("Houve alguma inconsistencia no sistema, tente novamente mais tarde.")
+            alert("Cadastro realizado com sucesso!");
+            Navigate('/')
+        } catch (error) {
+            console.error("Erro no cadastro do usuário:", error);
+            alert("Houve uma inconsistência no sistema. Tente novamente mais tarde.");
         }
     };
 
@@ -118,7 +109,7 @@ const Register = () => {
 
                     <Button type="submit" name="Registrar" variant="button-filled" />
                     <div className="register-link-container">
-                        Já possui cadastro? <Link children='Faça seu login' href='/login' />
+                        Já possui cadastro? <Link children='Faça seu login' href='/' />
                     </div>
                 </form>
             </div>
