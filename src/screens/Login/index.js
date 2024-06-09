@@ -24,9 +24,12 @@ const Login = () => {
             if (filteredUsers.length > 0) {
                 console.log('Usuário logado');
                 const userData = {
+                    id: filteredUsers[0].id,
                     name: filteredUsers[0].nome,
                     email: form.email,
-                    userType: filteredUsers[0].userType
+                    userType: filteredUsers[0].userType,
+                    cursosMinistrados: filteredUsers[0].cursosMinistrados,
+                    cursosInscritos: filteredUsers[0].cursosInscritos
                 };
                 console.log(userData)
                 loginUser(userData);

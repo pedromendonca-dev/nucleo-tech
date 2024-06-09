@@ -12,6 +12,8 @@ const Register = () => {
     const [confirmarSenha, setConfirmarSenha] = useState()
     const [telefone, setTelefone] = useState()
     const [userType, setUserType] = useState()
+    const [cursosInscritos, setCursosInscritos] = useState ([])
+    const [cursosMinistrados, setCursosMinistrados] = useState([])
 
 
     const clearFields = () => {
@@ -20,6 +22,8 @@ const Register = () => {
         setSenha('');
         setConfirmarSenha('');
         setTelefone('');
+        setCursosInscritos([]);
+        setCursosMinistrados([]);
     };
 
     const handleSubmit = async (e) => {
@@ -36,7 +40,9 @@ const Register = () => {
                 email,
                 senha,
                 telefone,
-                userType
+                userType,
+                cursosInscritos,
+                cursosMinistrados
             };
 
             const response = await axios.post('http://localhost:3000/usuarios', user);

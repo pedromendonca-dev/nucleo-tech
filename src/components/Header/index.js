@@ -42,12 +42,23 @@ const Header = () => {
         </ul>
 
         <div className="header-buttons">
-        <ul>
-            {user && user.userType === 2 && (
+        <ul className="header-options">
+            {user && user.userType == 2 && (
+            <>
             <li onClick={() => navigate('/meus-cursos')}>
               Meus cursos
             </li>
-            )}</ul>
+            <li onClick={() => navigate('/curso-cadastro')}>
+            Cadastrar cursos
+          </li>
+            </>
+            )}
+            {user && user.userType == 1 && (
+              <li onClick={()=> navigate('cursos-inscritos')}>
+               Cursos 
+              </li>
+            )}
+        </ul>
        
           <Button name="Sair" icon={Exit} 
           
